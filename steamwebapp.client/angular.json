@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "steamwebapp.client:build:production"
+              "buildTarget": "steamwebapp.client:build:production"
             },
             "development": {
-              "browserTarget": "steamwebapp.client:build:development"
+              "buildTarget": "steamwebapp.client:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -74,7 +74,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "steamwebapp.client:build"
+            "buildTarget": "steamwebapp.client:build"
           }
         },
         "test": {
