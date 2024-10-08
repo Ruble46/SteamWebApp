@@ -1,0 +1,12 @@
+
+.vs/
+
+SteamWebApp.Server/bin/
+
+SteamWebApp.Server/obj/
+
+SteamWebApp.Server/SteamWebApp.Server.csproj.user
+
+steamwebapp.client/.vscode/
+
+steamwebapp.client/obj/
