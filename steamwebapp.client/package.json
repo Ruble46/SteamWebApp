@@ -25,6 +25,7 @@
     "@angular/router": "^18.2.7",
     "@tsparticles/angular": "^3.0.0",
     "@tsparticles/engine": "^3.5.0",
+    "@tsparticles/slim": "^3.5.0",
     "jest-editor-support": "*",
     "run-script-os": "*",
     "rxjs": "~7.5.0",

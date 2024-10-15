@@ -29,6 +29,10 @@ import { AppComponent } from './components/App/App.component';
 //Helpers & Service Imports
 
 
+//External Imports
+import { NgxParticlesModule } from "@tsparticles/angular";
+
+
 const appRoutes: Routes = [
     {path: '', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
@@ -65,7 +69,8 @@ const appRoutes: Routes = [
         MatToolbarModule,
         MatIconModule,
         MatTreeModule,
-        MatExpansionModule
+        MatExpansionModule,
+        NgxParticlesModule
     ], 
     providers: [
         provideHttpClient(withInterceptorsFromDi()), 
