@@ -1,0 +1,8 @@
+.background {
+    background-image: url(https://cdn.pixabay.com/photo/2022/04/04/16/23/technology-7111755_1280.jpg); 
+    background-size: cover;
+}
+
+.backgroundCover {
+    background-color: rgba(0 0 0 / 80%);
+}

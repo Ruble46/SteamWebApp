@@ -1,0 +1,18 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" opened fixedInViewport="true" fixedTopGap="0" fixedBottomGap="0" style="background: #005cbb; color: white; width: 300px">
+        <mat-toolbar style="visibility: hidden;"></mat-toolbar>
+        <div style="padding: 16px">
+            <div class="menuSubHeader">Subheader 1</div>
+            <div class="menuSubHeader">Subheader 2</div>
+            <div class="menuSubHeader">Subheader 3</div>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar>
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </mat-toolbar>
+    </mat-sidenav-content>
+</mat-sidenav-container>
