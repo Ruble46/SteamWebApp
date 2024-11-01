@@ -1,0 +1,249 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+@use "sass:map";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+$fontConfig: (
+  display-4: mat.m2-define-typography-level(112px, 112px, 300, 'Roboto', -0.0134em),
+  display-3: mat.m2-define-typography-level(56px, 56px, 400, 'Roboto', -0.0089em),
+  display-2: mat.m2-define-typography-level(45px, 48px, 400, 'Roboto', 0.0000em),
+  display-1: mat.m2-define-typography-level(34px, 40px, 400, 'Roboto', 0.0074em),
+  headline: mat.m2-define-typography-level(24px, 32px, 400, 'Roboto', 0.0000em),
+  title: mat.m2-define-typography-level(20px, 32px, 500, 'Roboto', 0.0075em),
+  subheading-2: mat.m2-define-typography-level(16px, 28px, 400, 'Roboto', 0.0094em),
+  subheading-1: mat.m2-define-typography-level(15px, 24px, 500, 'Roboto', 0.0067em),
+  body-2: mat.m2-define-typography-level(14px, 24px, 500, 'Roboto', 0.0179em),
+  body-1: mat.m2-define-typography-level(14px, 20px, 400, 'Roboto', 0.0179em),
+  button: mat.m2-define-typography-level(14px, 14px, 500, 'Roboto', 0.0893em),
+  caption: mat.m2-define-typography-level(12px, 20px, 400, 'Roboto', 0.0333em),
+  input: mat.m2-define-typography-level(inherit, 1.125, 400, 'Roboto', 1.5px)
+);
+
+$primary-pal: (
+    50: #ffffff,
+    100: #d3d5d9,
+    200: #a7abb2,
+    300: #7b818c,
+    400: #4f5765,
+    500: #232d3f,
+    600: #1c2432,
+    700: #151b26,
+    800: #0e1219,
+    900: #07090d,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$seconary-pal: (
+    50: #ffffff,
+    100: #ebf9eb,
+    200: #d7f3d8,
+    300: #c2edc4,
+    400: #aee7b1,
+    500: #9ae19d,
+    600: #7bb47e,
+    700: #5c875e,
+    800: #3e5a3f,
+    900: #1f2d1f,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$warn-pal: (
+    50: #ffecf0,
+    100: #ffcfd6,
+    200: #f39ca0,
+    300: #ec757b,
+    400: #f8545a,
+    500: #ff4242,
+    600: #ef3840,
+    700: #dd2e3a,
+    800: #d02632,
+    900: #c11826,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000
+    )
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$SteamWebApp-primary: mat.m2-define-palette($primary-pal, 500, 300, 800, 50);
+$SteamWebApp-accent: mat.m2-define-palette($seconary-pal, 500, 300, 800, 50);
+$SteamWebApp-warn: mat.m2-define-palette($warn-pal, 500, 300, 800, 50);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$SteamWebApp-theme: mat.m2-define-dark-theme((
+  color: (
+    primary: $SteamWebApp-accent,
+    accent: $SteamWebApp-primary,
+    warn: $SteamWebApp-warn,
+    typography: $fontConfig,
+    density: 0
+  )
+));
+
+$light-text: #ffffff;
+$light-primary-text: $light-text;
+$light-accent-text: rgba($light-primary-text, 0.7);
+$light-disabled-text: rgba($light-primary-text, 0.5);
+$light-dividers: rgba($light-primary-text, 0.12);
+$light-focused: rgba($light-primary-text, 0.12);
+
+$mat-dark-theme-foreground: (
+  base:              $light-text,
+  divider:           $light-dividers,
+  dividers:          $light-dividers,
+  disabled:          $light-disabled-text,
+  disabled-button:   rgba($light-text, 0.3),
+  disabled-text:     $light-disabled-text,
+  elevation:         black,
+  hint-text:         $light-disabled-text,
+  secondary-text:    $light-accent-text,
+  accent-text:       $light-accent-text,
+  icon:              $light-text,
+  icons:             $light-text,
+  text:              $light-text,
+  slider-min:        $light-text,
+  slider-off:        rgba($light-text, 0.3),
+  slider-off-active: rgba($light-text, 0.3),
+);
+
+// Dark bg
+$dark-background:     #0e131a;
+$dark-bg-lighter-5:   lighten($dark-background, 5%);
+$dark-bg-lighter-10:  lighten($dark-background, 10%);
+$dark-bg-lighter-20:  lighten($dark-background, 20%);
+$dark-bg-lighter-30:  lighten($dark-background, 30%);
+$light-bg-alpha-4:    rgba(#ffffff, 0.04);
+$light-bg-alpha-12:   rgba(#ffffff, 0.12);
+
+// Background palette for dark themes.
+$mat-dark-theme-background: (
+  background:               $dark-background,
+  status-bar:               $dark-bg-lighter-20,
+  app-bar:                  $dark-bg-lighter-5,
+  hover:                    $light-bg-alpha-4,
+  card:                     $dark-bg-lighter-5,
+  dialog:                   $dark-bg-lighter-5,
+  tooltip:                  $dark-bg-lighter-20,
+  disabled-button:          $light-bg-alpha-12,
+  raised-button:            $dark-bg-lighter-5,
+  focused-button:           $light-focused,
+  selected-button:          $dark-bg-lighter-20,
+  selected-disabled-button: $dark-bg-lighter-30,
+  disabled-button-toggle:   $dark-bg-lighter-10,
+  unselected-chip:          $dark-bg-lighter-20,
+  disabled-list-option:     $dark-bg-lighter-10,
+);
+
+$SteamWebApp-theme: map.set($SteamWebApp-theme, 'color', 'background', $mat-dark-theme-background);
+$SteamWebApp-theme: map.set($SteamWebApp-theme, 'background', $mat-dark-theme-background);
+$SteamWebApp-theme: map.set($SteamWebApp-theme, 'color', 'foreground', $mat-dark-theme-foreground);
+$SteamWebApp-theme: map.set($SteamWebApp-theme, 'foreground', $mat-dark-theme-foreground);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($SteamWebApp-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.fullWidth {
+    width: 100%;
+}
+
+button {
+    border-radius: 4px !important;
+}
+
+.fullCover {
+    height: 100vh;
+    width: 100vw;
+}
+
+.centerBoth {
+    justify-content: center; 
+    display: flex; 
+    align-items: center;
+}
+
+.noAuthCard {
+    max-width: 480px
+}
+
+.cardHeaderCenter {
+    justify-content: center; 
+    text-align: center;
+}
+
+.cardLrgHeader {
+    font-size: 26px !important;
+}
+
+.pad16 {
+    padding: 16px !important;
+}
+
+.mrgBot8 {
+    margin-bottom: 8px;
+}
+
+@media only screen and (max-width: 480px) {
+    .noAuthCard {
+        width: 100%;
+        height: 100%;
+    }
+}
