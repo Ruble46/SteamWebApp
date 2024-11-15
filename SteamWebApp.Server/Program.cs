@@ -14,8 +14,34 @@ namespace SteamWebApp.Server
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // CORS Policy
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFrontendApp", policy =>
+                {
+                    policy.WithOrigins("https://127.0.0.1:4200") // Replace with your frontend URL
+                          .AllowAnyMethod()
+                          .AllowAnyHeader()
+                          .AllowCredentials();
+                });
+            });
+
+            builder.Services.AddAuthentication(options => {
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "Steam";
+            })
+            .AddCookie("Cookies")
+            .AddOpenId("Steam", "Steam", options =>
+            {
+                options.Authority = new Uri("https://steamcommunity.com/openid/");
+                options.CallbackPath = "/api/SteamAuth/app";
+                options.ClaimsIssuer = "Steam";
+                options.SaveTokens = true;
+            });
+
             var app = builder.Build();
 
+            app.UseCors("AllowFrontendApp");
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
@@ -29,7 +55,7 @@ namespace SteamWebApp.Server
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
+            app.UseAuthentication();
 
             app.MapControllers();
 

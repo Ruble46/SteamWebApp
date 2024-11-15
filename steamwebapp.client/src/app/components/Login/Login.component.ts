@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgParticlesService } from "@tsparticles/angular";
 import { Container } from '@tsparticles/engine';
 import { loadSlim } from "@tsparticles/slim";
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import {
     MoveDirection,
     OutMode,
@@ -13,6 +15,12 @@ import {
   styleUrls: ['./Login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+    Login() {
+      // Redirect to the Steam login endpoint
+      window.location.href = 'https://localhost:7100/api/SteamAuth/login';
+    }
+
     public id = "tsparticles";
     public particleOptions = {
         fpsLimit: 60,
@@ -57,7 +65,7 @@ export class LoginComponent implements OnInit {
         detectRetina: true,
       };
 
-    constructor(private readonly ngParticlesService: NgParticlesService) {
+    constructor(private readonly ngParticlesService: NgParticlesService, private http: HttpClient, private router: Router) {
 
     }
 
@@ -70,8 +78,21 @@ export class LoginComponent implements OnInit {
             // starting from v2 you can add only the features you need reducing the bundle size
             //await loadFull(engine);
             await loadSlim(engine);
-          });
+        });
     }
+
+  SteamLogin() {
+    let httpOptions: Object = { observe: "response" }
+
+    //this.http.post<string>('https://localhost:7100/api/SteamAuth/login', null, httpOptions)
+    this.http.post<string>('https://localhost:7100/api/SteamAuth/login', null, httpOptions).subscribe(
+      (result) => {
+        var test = result;
+        console.log("OOGA: " + test);
+        this.router.navigate(['/app']);
+      }
+    );
+  }
 
     particlesLoaded(container: Container): void {
         console.log(container);
