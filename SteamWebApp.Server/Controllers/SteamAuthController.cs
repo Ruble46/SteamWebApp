@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -16,17 +17,20 @@ namespace SteamWebApp.Server.Controllers
         public IActionResult Login()
         {
             // This will redirect the user to Steam's OpenID provider for authentication
-            var result = Challenge(new AuthenticationProperties { RedirectUri = "/api/SteamAuth/app" }, "Steam");
-            
-            return result;
+            return Challenge(new AuthenticationProperties { RedirectUri = "https://localhost:4200/app" }, "Steam");
         }
 
-        [HttpGet("app")]
-        [AllowAnonymous]
+        [HttpGet("TestAuth")]
         [EnableCors("AllowFrontendApp")]
-        public IActionResult app()
+        [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+        public IActionResult TestAuth()
         {
-            return File("~/wwwroot/", "text/html");
+            if(HttpContext.User.Identity == null || !HttpContext.User.Identity.IsAuthenticated)
+            {
+                return Unauthorized();
+            }
+
+            return Ok();
         }
     }
 }

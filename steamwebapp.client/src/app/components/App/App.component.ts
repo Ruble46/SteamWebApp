@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,7 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./App.component.css']
 })
 export class AppComponent {
-  constructor() {
+  constructor(private http: HttpClient) {
 
+  }
+
+  Test() {
+    this.http.get("https://localhost:7100/api/SteamAuth/TestAuth", { observe: "response", withCredentials: true}).subscribe(result => {
+
+    });
   }
 }

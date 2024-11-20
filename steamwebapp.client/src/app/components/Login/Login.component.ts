@@ -81,19 +81,6 @@ export class LoginComponent implements OnInit {
         });
     }
 
-  SteamLogin() {
-    let httpOptions: Object = { observe: "response" }
-
-    //this.http.post<string>('https://localhost:7100/api/SteamAuth/login', null, httpOptions)
-    this.http.post<string>('https://localhost:7100/api/SteamAuth/login', null, httpOptions).subscribe(
-      (result) => {
-        var test = result;
-        console.log("OOGA: " + test);
-        this.router.navigate(['/app']);
-      }
-    );
-  }
-
     particlesLoaded(container: Container): void {
         console.log(container);
       }
