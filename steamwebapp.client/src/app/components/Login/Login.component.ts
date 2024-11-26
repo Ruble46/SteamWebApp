@@ -79,6 +79,8 @@ export class LoginComponent implements OnInit {
             //await loadFull(engine);
             await loadSlim(engine);
         });
+
+        //TODO: do auth check and redirect to app if 200 back
     }
 
     particlesLoaded(container: Container): void {

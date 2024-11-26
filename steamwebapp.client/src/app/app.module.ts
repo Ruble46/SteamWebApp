@@ -1,5 +1,5 @@
 //Angular Imports
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -32,6 +32,7 @@ import { AppComponent } from './components/App/App.component';
 //External Imports
 import { NgxParticlesModule } from "@tsparticles/angular";
 import { AuthGuard } from './services/RouteAuthGuard';
+import { UnauthorizedInterceptor } from './services/UnauthorizedInterceptor';
 
 
 const appRoutes: Routes = [
@@ -77,6 +78,7 @@ const appRoutes: Routes = [
         provideHttpClient(withInterceptorsFromDi()), 
         provideAnimationsAsync(),
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
+        {provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptor, multi: true}
     ]})
 
 export class AppModule { }

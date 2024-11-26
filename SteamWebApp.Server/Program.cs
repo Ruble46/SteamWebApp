@@ -44,6 +44,7 @@ namespace SteamWebApp.Server
                     context.Response.StatusCode = 401;
                     return Task.CompletedTask;
                 };
+                options.ExpireTimeSpan = TimeSpan.FromDays(7);
             })
             .AddSteam(options =>
             {

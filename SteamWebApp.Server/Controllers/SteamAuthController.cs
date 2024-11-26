@@ -20,10 +20,10 @@ namespace SteamWebApp.Server.Controllers
             return Challenge(new AuthenticationProperties { RedirectUri = "https://localhost:4200/app" }, "Steam");
         }
 
-        [HttpGet("TestAuth")]
+        [HttpGet("Verify")]
         [EnableCors("AllowFrontendApp")]
         [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-        public IActionResult TestAuth()
+        public IActionResult Verify()
         {
             if(HttpContext.User.Identity == null || !HttpContext.User.Identity.IsAuthenticated)
             {
