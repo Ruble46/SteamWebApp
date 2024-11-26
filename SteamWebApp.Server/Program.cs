@@ -22,7 +22,7 @@ namespace SteamWebApp.Server
             {
                 options.AddPolicy("AllowFrontendApp", policy =>
                 {
-                    policy.WithOrigins("https://127.0.0.1:4200") // Replace with your frontend URL
+                    policy.WithOrigins("https://localhost:4200") // Replace with your frontend URL
                           .AllowAnyMethod()
                           .AllowAnyHeader()
                           .AllowCredentials();
@@ -39,6 +39,11 @@ namespace SteamWebApp.Server
                 options.Cookie.Name = "SteamAuth";
                 options.Cookie.IsEssential = true;
                 options.Cookie.HttpOnly = true;
+                options.Events.OnRedirectToLogin = context =>
+                {
+                    context.Response.StatusCode = 401;
+                    return Task.CompletedTask;
+                };
             })
             .AddSteam(options =>
             {
