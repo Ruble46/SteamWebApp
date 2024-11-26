@@ -31,7 +31,6 @@ import { AppComponent } from './components/App/App.component';
 
 //External Imports
 import { NgxParticlesModule } from "@tsparticles/angular";
-import { CookieService } from 'ngx-cookie-service';
 
 
 const appRoutes: Routes = [
@@ -77,7 +76,6 @@ const appRoutes: Routes = [
         provideHttpClient(withInterceptorsFromDi()), 
         provideAnimationsAsync(),
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
-        CookieService
     ]})
 
 export class AppModule { }
