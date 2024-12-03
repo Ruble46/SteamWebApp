@@ -1,6 +1,7 @@
 
 using AspNet.Security.OpenId.Steam;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
 
 namespace SteamWebApp.Server
@@ -77,6 +78,21 @@ namespace SteamWebApp.Server
 
                     return Task.CompletedTask;
                 };
+            });
+
+            builder.Services.AddHttpClient();
+            builder.Services.AddSingleton<SteamService>(serviceProvider =>
+            {
+                var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+                var apiKey = configuration["SteamAPIKey"];
+                var httpClient = serviceProvider.GetRequiredService<IHttpClientFactory>().CreateClient();
+
+                if (string.IsNullOrEmpty(apiKey))
+                {
+                    throw new InvalidOperationException("Steam API key is not configured.");
+                }
+
+                return new SteamService(apiKey, httpClient);
             });
 
             var app = builder.Build();
