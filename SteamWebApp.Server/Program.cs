@@ -1,6 +1,7 @@
 
 using AspNet.Security.OpenId.Steam;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
 
 namespace SteamWebApp.Server
@@ -66,10 +67,10 @@ namespace SteamWebApp.Server
                 {
                     var steamUserAsClaims = context_.Identity;
 
-                    //Example: get steamid from claims
-                    var nameIdentifier = steamUserAsClaims.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+                    //Example: get steamid from claims. Leaving for example. We now have static methods to do this.
+                    //var nameIdentifier = steamUserAsClaims.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
-                    //Example: get steam username from claims
+                    //Example: get steam username from claims. Leaving for example. We now have static methods to do this.
                     var name = steamUserAsClaims.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
 
                     //context_.HttpContext.SignInAsync(new ClaimsPrincipal(steamUserAsClaims), new AuthenticationProperties()).Wait(TimeSpan.FromSeconds(5));
@@ -77,6 +78,21 @@ namespace SteamWebApp.Server
 
                     return Task.CompletedTask;
                 };
+            });
+
+            builder.Services.AddHttpClient();
+            builder.Services.AddSingleton<SteamService>(serviceProvider =>
+            {
+                var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+                var apiKey = configuration["SteamAPIKey"];
+                var httpClient = serviceProvider.GetRequiredService<IHttpClientFactory>().CreateClient();
+
+                if (string.IsNullOrEmpty(apiKey))
+                {
+                    throw new InvalidOperationException("Steam API key is not configured.");
+                }
+
+                return new SteamService(apiKey, httpClient);
             });
 
             var app = builder.Build();

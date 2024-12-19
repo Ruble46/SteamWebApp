@@ -12,7 +12,7 @@ export class AppComponent {
   }
 
   Test() {
-    this.http.get("https://localhost:7100/api/SteamAuth/Verify", { observe: "response", withCredentials: true}).subscribe(result => {
+    this.http.get("https://localhost:7100/api/SteamUser/SteamUserSummary", { observe: "response", withCredentials: true}).subscribe(result => {
 
     });
   }
