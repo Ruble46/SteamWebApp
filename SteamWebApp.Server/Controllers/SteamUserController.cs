@@ -29,7 +29,7 @@ namespace SteamWebApp.Server.Controllers
                 string? nameIdentifier = claimsIdentity?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 string? steamId = nameIdentifier?.Split('/').Last();
 
-                IActionResult? user = await _steamService.GetSteamUserSummaryAsync(steamId);
+                object? user = await _steamService.GetSteamUserSummaryAsync(steamId);
                 if (user == null)
                 {
                     return Unauthorized();

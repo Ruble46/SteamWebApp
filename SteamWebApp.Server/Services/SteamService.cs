@@ -12,7 +12,7 @@ public class SteamService
         _httpClient = httpClient;
     }
 
-    public async Task<IActionResult?> GetSteamUserSummaryAsync(string? steamId = null)
+    public async Task<object?> GetSteamUserSummaryAsync(string? steamId = null)
     {
         if (string.IsNullOrEmpty(_apiKey) || string.IsNullOrEmpty(steamId))
         {
@@ -28,7 +28,7 @@ public class SteamService
 
             // Check if user data exists
             JToken? player = data["response"]?["players"]?[0];
-            return (IActionResult?)(player as JObject);
+            return player as object;
         }
         catch (HttpRequestException ex)
         {
