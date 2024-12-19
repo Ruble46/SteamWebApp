@@ -12,7 +12,7 @@ public class SteamService
         _httpClient = httpClient;
     }
 
-    public async Task<object?> GetSteamUserSummaryAsync(string? steamId = null)
+    public async Task<object?> GetUserByIDAsync(string? steamId = null)
     {
         if (string.IsNullOrEmpty(_apiKey) || string.IsNullOrEmpty(steamId))
         {
