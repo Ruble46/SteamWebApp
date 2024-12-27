@@ -15,12 +15,12 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatDividerModule} from '@angular/material/divider';
 
 //Component Imports
 import { RootComponent } from './Root.component';
 import { LoginComponent } from './components/Login/Login.component';
-import { RegisterComponent } from './components/Register/Register.component';
-import { ForgotPasswordComponent } from './components/ForgotPassword/ForgotPassword.component';
 import { AppComponent } from './components/App/App.component';
 
 //Dialog Imports
@@ -37,10 +37,6 @@ import { UnauthorizedInterceptor } from './services/UnauthorizedInterceptor';
 
 const appRoutes: Routes = [
     {path: '', component: LoginComponent},
-    {path: 'register', component: RegisterComponent},
-    {path: 'password', children: [
-        {path: 'reset', component: ForgotPasswordComponent}
-    ]},
     {path: 'app', component: AppComponent, canActivate: [AuthGuard]}
   ];
 
@@ -48,8 +44,6 @@ const appRoutes: Routes = [
     declarations: [
         RootComponent,
         LoginComponent,
-        RegisterComponent,
-        ForgotPasswordComponent,
         AppComponent
     ],
     bootstrap: [
@@ -72,6 +66,8 @@ const appRoutes: Routes = [
         MatIconModule,
         MatTreeModule,
         MatExpansionModule,
+        MatMenuModule,
+        MatDividerModule,
         NgxParticlesModule
     ], 
     providers: [

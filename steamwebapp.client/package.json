@@ -24,12 +24,14 @@
     "@angular/platform-browser-dynamic": "^18.2.7",
     "@angular/router": "^18.2.7",
     "@tsparticles/angular": "^3.0.0",
-    "@tsparticles/engine": "^3.5.0",
-    "@tsparticles/slim": "^3.5.0",
+    "@tsparticles/engine": "^3.7.1",
+    "@tsparticles/path-polygon": "^3.7.1",
+    "@tsparticles/slim": "^3.7.1",
     "jest-editor-support": "*",
     "run-script-os": "*",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
+    "tsparticles": "^3.7.1",
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
