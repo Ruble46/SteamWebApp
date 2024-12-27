@@ -1,6 +1,56 @@
+.mainSizeNav {
+    width: 200px;
+}
+
 .menuSubHeader {
     text-transform: uppercase;
-    font-size: 1rem;
+    /* font-size: 1rem; */
     margin: 0.75rem 0;
-    font-weight: 500;
+    /* font-weight: 500; */
+}
+
+.dropDownGrouping {
+    border-left: 2px solid #9ae19d; 
+    padding-left: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropDownGrouping > * {
+    justify-content: unset;
+}
+
+.groupBtn {
+    width: 100%;
+    height: 50px;
+}
+
+.groupImg {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.profileUsername {
+    margin-left: 8px;
+}
+
+.profileImage {
+    max-width: 32px;
+}
+
+@media screen and (max-width: 480px) {
+    .mainSizeNav {
+        width: 100px;
+        font-size: 12px;
+    }
+
+    .profileUsername {
+        margin-left: 8px;
+        font-size: 12px;
+    }
+
+    .profileImage {
+        max-width: 24px;
+    }
 }

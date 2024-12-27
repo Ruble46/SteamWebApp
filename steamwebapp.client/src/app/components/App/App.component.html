@@ -1,22 +1,75 @@
 <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="side" opened fixedInViewport="true" fixedTopGap="0" fixedBottomGap="0" style="width: 300px" color="primary">
+    <mat-sidenav #sidenav mode="side" opened fixedInViewport="true" fixedTopGap="0" fixedBottomGap="0" color="primary" class="mainSizeNav">
         <mat-toolbar style="visibility: hidden;" color="primary"></mat-toolbar>
-        <div style="padding: 16px">
-            <div class="menuSubHeader">Subheader 1</div>
-            <div class="menuSubHeader">Subheader 2</div>
-            <div class="menuSubHeader">Subheader 3</div>
+        <div style="padding: 16px;">
+            <button #imageButton mat-flat-button color="accent" class="groupBtn" style="margin-bottom: 8px;">
+                <mat-icon>calendar_month</mat-icon>
+                Calendar
+            </button>
+
+            <button #imageButton mat-flat-button color="accent" class="groupBtn" style="margin-bottom: 8px;">
+                <mat-icon>sports_esports</mat-icon>
+                Games
+            </button>
+
+            <!-- Groups Subsection -->
+            <h3 class="menuSubHeader">Groups</h3>
+            <div style="display: flex; flex-direction: column;">
+                <div *ngFor="let group of groups" style="margin-bottom: 8px;">
+                    <button #imageButton mat-flat-button color="accent" class="groupBtn groupImg" [style.background-color]="group.backgroundColor" [style.background-image]="'url(' + group.image + ')'">
+                        <div style="background-color: rgba(0, 0, 0, 0.75); padding: 6px; border-radius: 4px; width: 50px;">{{group.name}}</div>
+                    </button>
+                </div>
+            </div>
         </div>
     </mat-sidenav>
 
-    <mat-sidenav-content>
-      <mat-toolbar>
-        <button mat-icon-button (click)="sidenav.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-      </mat-toolbar>
+    <mat-sidenav-content style="height: 100vh; height: 100dvh">
+        <mat-toolbar style="justify-content: space-between;">
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
 
-      <button mat-flat-button color="accent" (click)="Test()">
-        Test
-      </button>
+            <button mat-button [matMenuTriggerFor]="menu">
+                <div style="display: flex; align-items: center;">
+                    <img [src]="profile.avatar" alt="alt" class="profileImage">
+                    <span class="profileUsername">{{profile.personaname}}</span>
+                    <mat-icon>expand_more</mat-icon>
+                </div>
+            </button>
+
+            <mat-menu #menu="matMenu" xPosition="before">
+                <button mat-menu-item [matMenuTriggerFor]="steamLinks">Steam Links</button>
+                <mat-divider></mat-divider>
+                <button mat-menu-item>View Profile</button>
+                <button mat-menu-item>Account Details</button>
+                <button mat-menu-item>Preferences</button>
+                <mat-divider></mat-divider>
+                <button mat-menu-item>Logout</button>
+            </mat-menu>
+
+            <mat-menu #steamLinks="matMenu">
+                <button mat-menu-item (click)="goToSteamStore()">
+                    Store
+                    <mat-icon iconPositionEnd>launch</mat-icon>
+                </button>
+                <button mat-menu-item (click)="goToWishlist()">
+                    Wishlist
+                    <mat-icon iconPositionEnd>launch</mat-icon>
+                </button>
+                <button mat-menu-item (click)="goToSteamProfile()">
+                    Profile
+                    <mat-icon iconPositionEnd>launch</mat-icon>
+                </button>
+                <button mat-menu-item (click)="goToSteamLibrary()">
+                    Library
+                    <mat-icon iconPositionEnd>launch</mat-icon>
+                </button>
+            </mat-menu>
+        </mat-toolbar>
+        
+        <button mat-flat-button color="accent" (click)="Test()">
+            Test
+        </button>
     </mat-sidenav-content>
 </mat-sidenav-container>

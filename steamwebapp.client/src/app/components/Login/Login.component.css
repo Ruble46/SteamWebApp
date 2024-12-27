@@ -1,12 +1,22 @@
-.background {
-    background: rgb(154,225,157);
-    background: linear-gradient(139deg, rgba(154,225,157,1) 0%, rgba(154,225,157,1) 31%, rgba(35,45,63,1) 100%);
-}
-
 .backgroundCover {
-    background-color: rgba(0 0 0 / 80%);
+    /* background-color: rgba(0 0 0 / 30%); */
+    backdrop-filter: blur(4px);
 }
 
 .linkOffset {
     transform: translate(0, -16px);
+}
+
+.loginBtn {
+    background-image: url('src/assets/steam.png'); 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+    width: 100%;
+}
+
+@media only screen and (max-width: 480px) {
+    .loginBtn {
+       max-width: 196px;
+    }
 }
