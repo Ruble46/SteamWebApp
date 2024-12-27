@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
 public class SteamService
@@ -12,7 +11,7 @@ public class SteamService
         _httpClient = httpClient;
     }
 
-    public async Task<object?> GetUserByIDAsync(string? steamId = null)
+    public async Task<User?> GetUserByIDAsync(string? steamId = null)
     {
         if (string.IsNullOrEmpty(_apiKey) || string.IsNullOrEmpty(steamId))
         {
@@ -27,8 +26,39 @@ public class SteamService
             JObject? data = JObject.Parse(response);
 
             // Check if user data exists
-            JToken? player = data["response"]?["players"]?[0];
-            return player as object;
+            UserResponse? usersData = data["response"]?.ToObject<UserResponse>();
+
+            User? player = usersData?.players?.FirstOrDefault(new User());
+            return player;
+        }
+        catch (HttpRequestException ex)
+        {
+            throw new Exception($"Error fetching Steam user info: {ex.Message}");
+        }
+    }
+
+    public async Task<GameLibraryResponse> GetUserLibraryAsync(string? steamId = null)
+    {
+        if (string.IsNullOrEmpty(_apiKey) || string.IsNullOrEmpty(steamId))
+        {
+            throw new InvalidOperationException("Steam API key is not configured.");
+        }
+
+        string? url = $" http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key={_apiKey}&steamid={steamId}&include_appinfo=1&format=json";
+
+        try
+        {
+            string? response = await _httpClient.GetStringAsync(url);
+            JObject? data = JObject.Parse(response);
+
+            GameLibraryResponse? gameLibrary = data["response"]?.ToObject<GameLibraryResponse>();
+
+            if (gameLibrary == null)
+            {
+                gameLibrary = new GameLibraryResponse();
+            }
+
+            return gameLibrary;
         }
         catch (HttpRequestException ex)
         {

@@ -37,13 +37,18 @@ namespace SteamWebApp.Server.Controllers
                     return Problem("Failed to obtain SteamID from user authentication");
                 }
 
-                object? user = await _steamService.GetSteamUserSummaryAsync(steamId);
+                User? user = await _steamService.GetUserByIDAsync(steamId);
+                GameLibraryResponse? gameLibrary = await _steamService.GetUserLibraryAsync(steamId);
                 if (user == null)
                 {
                     return Unauthorized();
                 }
 
-                return Ok(user.ToString());
+                UserSummaryResponse userSummary = new UserSummaryResponse();
+                userSummary.userresponse = user;
+                userSummary.gamelibrary = gameLibrary;
+
+                return Ok(userSummary);
             }
             catch (Exception ex)
             {
