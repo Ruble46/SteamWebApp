@@ -2,6 +2,11 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
   "projects": {
     "steamwebapp.client": {
       "projectType": "application",
@@ -11,11 +16,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/steamwebapp.client",
+            "outputPath": {
+              "base": "dist/steamwebapp.client"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -25,9 +31,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -46,9 +53,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -60,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "steamwebapp.client:build:production"
+              "buildTarget": "steamwebapp.client:build:production"
             },
             "development": {
-              "browserTarget": "steamwebapp.client:build:development"
+              "buildTarget": "steamwebapp.client:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -74,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "steamwebapp.client:build"
+            "buildTarget": "steamwebapp.client:build"
           }
         },
         "test": {
@@ -90,7 +95,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": [],
             "karmaConfig": "karma.conf.js"
@@ -98,5 +103,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

@@ -1,0 +1,22 @@
+.backgroundCover {
+    /* background-color: rgba(0 0 0 / 30%); */
+    backdrop-filter: blur(4px);
+}
+
+.linkOffset {
+    transform: translate(0, -16px);
+}
+
+.loginBtn {
+    background-image: url('src/assets/steam.png'); 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+    width: 100%;
+}
+
+@media only screen and (max-width: 480px) {
+    .loginBtn {
+       max-width: 196px;
+    }
+}
