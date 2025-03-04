@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using SteamWebApp.Server.Logic;
+using SteamWebApp.Server.Data;
 using System.Security.Claims;
 
 namespace SteamWebApp.Server.Controllers
